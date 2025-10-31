@@ -1,96 +1,71 @@
-# React Native + TypeScript + NativeWind + Expo
+# Mobile Development Setup with Expo (React Native)
 
-A minimal, opinionated starter README for building cross-platform mobile apps with React Native, TypeScript, NativeWind (utility-first styling), and the Expo framework.
-
-## Summary
-This stack provides:
-- Cross-platform native UI (iOS & Android) with React Native
-- Type safety and better DX with TypeScript
-- Utility-first styling using NativeWind (Tailwind-like for RN)
-- Fast iteration, device testing, and OTA updates with Expo
-
-## Features
-- Single codebase for iOS and Android
-- Predictable types and autocompletion
-- Fast styling with utility classes
-- Easy device testing via Expo Go
+A smooth mobile dev workflow requires more resources than web. This README sets up Expo Go for testing React Native apps on physical devices and, optionally, the iOS Simulator.
 
 ## Prerequisites
-- Node.js v16+
-- npm or yarn
-- Expo CLI (optional): npm install -g expo-cli
-- A code editor (e.g., VS Code)
-- Expo Go app on your device (for quick testing)
+- Node.js LTS
+- VS Code (recommended)
+- macOS, Linux, or Windows
+- Stable Wi‑Fi network shared by your computer and phone
+- Expo account (free)
 
-## Quick start
-Create a new Expo app (with TypeScript):
-```bash
-npx create-expo-app MyApp --template expo-template-blank-typescript
-cd MyApp
-```
+## Why Expo Go
+Emulators/simulators can be heavy and fragmented. Expo Go lets you run React Native apps directly on physical devices (iOS and Android) with minimal setup.
 
-Start the dev server:
-```bash
-npm start   # or yarn start
-# then scan the QR code with Expo Go or run on an emulator
-```
+## Install Expo Go
+- Visit https://expo.dev/go
+- Select the latest SDK
+- Install for your device:
+    - Android: Google Play Store
+    - iOS: Apple App Store
+- Open Expo Go and sign in (or create an account)
 
-## Add NativeWind (basic)
-1. Install packages:
-```bash
-npm install nativewind tailwindcss
-npx tailwindcss init -p
-```
-2. Configure `tailwind.config.js` (ensure content includes your source files):
-```js
-module.exports = {
-    content: ["./**/*.{js,jsx,ts,tsx}"],
-    theme: { extend: {} },
-    plugins: [],
-};
-```
-3. Enable the NativeWind Babel plugin in `babel.config.js`:
-```js
-module.exports = function(api) {
-    api.cache(true);
-    return {
-        presets: ['babel-preset-expo'],
-        plugins: ['nativewind/babel'],
-    };
-};
-```
-4. Example usage in `App.tsx`:
-```tsx
-import React from 'react';
-import { View, Text } from 'react-native';
+## iOS Setup
 
-export default function App() {
-    return (
-        <View className="flex-1 items-center justify-center bg-white">
-            <Text className="text-lg font-bold">Hello, NativeWind + TypeScript!</Text>
-        </View>
-    );
-}
-```
+### Run on a physical iPhone/iPad
+- Install Expo Go from the App Store.
+- Ensure your iOS device and development machine are on the same Wi‑Fi.
+- Create a new project or use an existing one:
+    - npx create-expo-app MyApp
+    - cd MyApp
+    - npx expo start
+- In the dev server UI/CLI:
+    - If LAN fails on iOS, switch to Connection: Tunnel.
+- On your iPhone:
+    - Open Expo Go and sign in with the same account (recommended), then tap the project under Recent, or
+    - Scan the QR code shown in your terminal/browser. On iOS, use the Camera app or the QR scanner inside Expo Go.
 
-## TypeScript
-- create-expo-app with the TypeScript template adds a working `tsconfig.json`.
-- Use typings for React Native and any native modules you add.
+Notes:
+- iOS LAN discovery may be blocked by network firewalls. Tunnel mode is the most reliable on mixed networks.
+- Keep Expo Go and iOS updated for best compatibility.
 
-## Useful npm scripts
-- npm start — start Expo dev server
-- npm run android — open Android emulator (if configured)
-- npm run ios — open iOS simulator (macOS only)
-- npm run web — run a web build (Expo web support)
+### Run on the iOS Simulator (macOS only)
+- Install Xcode from the Mac App Store.
+- Open Xcode once to complete setup and accept licenses.
+- Install Command Line Tools in Xcode > Settings > Locations.
+- From your project:
+    - npx expo start --ios
+    - This launches the iOS Simulator and installs the Expo Go client automatically.
+- The Simulator does not require a physical iPhone and works only on macOS.
 
-## Tips
-- Use Expo Go for quick device testing; use custom dev clients when adding native modules.
-- Keep Tailwind classes readable by grouping and using design tokens when needed.
-- Use ESLint + Prettier and enable TypeScript strictness incrementally.
+## Android (optional)
+- Install Expo Go from Google Play.
+- npx expo start
+- Scan the QR code in Expo Go or press a in the terminal to open an Android emulator if installed.
 
-## Next steps
-- Add navigation (React Navigation)
-- Integrate state management (Context / Redux / Recoil / Zustand)
-- Configure CI, testing, and app signing for production builds
+## Troubleshooting
+- App not loading on iOS (LAN): switch to Tunnel in the dev server.
+- Stuck cache or mismatched SDK: npx expo start -c
+- Same network requirement: ensure both devices share the same Wi‑Fi and that VPNs/firewalls are off or allow local traffic.
+- Reinstall/update Expo Go if the SDK is outdated.
 
-License: choose one for your project (e.g., MIT)
+## Document Your Setup
+Record:
+- Device model and OS version
+- Expo SDK version
+- Connection type used (LAN or Tunnel)
+- Issues encountered and fixes
+- Screenshots of Expo Go running your app (optional)
+- Update this README as you iterate
+
+You are ready to build and test React Native apps with Expo on iOS and Android.
